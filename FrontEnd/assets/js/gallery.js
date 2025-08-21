@@ -7,7 +7,6 @@ let filters = []
 async function fetchWorks() {
   const reponse = await fetch("http://localhost:5678/api/works");
   const projets = await reponse.json();
-  console.log(projets)
   works = projets
   return projets
 } 

@@ -174,7 +174,7 @@ imageInput.addEventListener("change", function () {
   if (file) {
     const reader = new FileReader();
     reader.onload = function (e) {
-      imagePreview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-width:100%; max-height:100%; object-fit:contain;">`;
+      imagePreview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
     };
     reader.readAsDataURL(file);
   }

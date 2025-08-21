@@ -9,15 +9,27 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<!-- Ajout du Font Awesome pour l'icône "modifier" -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
+	<!-- Conteneur pour le bandeau noir -->
+	 <div id="edition-bar" class="edition-bar">
+ 		 <div class="edition-message">
+    		<i class="fa-regular fa-pen-to-square"></i> Mode édition
+  		</div>
+	</div>
+
+
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li>login</li>
+			<li class="navItem">projets</li>
+			<li class="navItem">contact</li>
+			<li class="navItem"><a href="./login.html" id="login-link">login</a></li>
+			<li class="navItem"><a href="#" id="logout-link" class="hidden">logout</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -35,52 +47,16 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<!-- Conteneur pour le bouton modifier -->
+		<div class="edit-header">
+			<h2>Mes Projets</h2>
+			<button id="edit-btn" class="edit-btn"><i class="fa-regular fa-pen-to-square"></i> modifier</button>
+		</div>
+		<h2 class="default-title">Mes Projets</h2> <!-- Titre pour version non connectée -->
+		<!-- Catégories (filters) -->
+		<div class="filters"></div>
+		<!-- Rendre la galerie dynamique -->
 		<div class="gallery">
-			<figure>
-				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-				<figcaption>Abajour Tahina</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-				<figcaption>Appartement Paris V</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
-				<figcaption>Restaurant Sushisen - Londres</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
-				<figcaption>Villa “La Balisiere” - Port Louis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
-				<figcaption>Structures Thermopolis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-				<figcaption>Appartement Paris X</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
-				<figcaption>Pavillon “Le coteau” - Cassis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-				<figcaption>Villa Ferneze - Isola d’Elba</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
-				<figcaption>Appartement Paris XVIII</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-				<figcaption>Bar “Lullaby” - Paris</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-				<figcaption>Hotel First Arte - New Delhi</figcaption>
-			</figure>
 		</div>
 	</section>
 	<section id="contact">
@@ -105,5 +81,71 @@
 		</ul>
 	</nav>
 </footer>
+
+<!-- Modale -->
+<div id="modal" class="modal hidden">
+  <div class="modal-overlay"></div> <!-- Couvre l'arrière-plan -->
+  <div class="modal-content"> <!-- Conteneur principal de la modale -->
+    <span class="close">
+		<i class="fa fa-times"></i>
+	</span>
+
+    <!-- Galerie photo -->
+    <div class="modal-gallery-view">
+      <h3 class="modal-title">Galerie photo</h3>
+      <div class="modal-gallery"></div>
+      <hr class="modal-separator" />
+      <button class="add-photo-btn">Ajouter une photo</button>
+    </div>
+
+    <!-- Formulaire ajout -->
+    <div class="modal-form-view hidden">
+      <span class="back-arrow">
+		<i class="fa fa-arrow-left"></i>
+	  </span>
+      <h3 class="modal-title">Ajout photo</h3>
+
+      <form id="photo-form" enctype="multipart/form-data">
+        <!-- Zone d'upload de l'image et de preview -->
+        <div class="image-upload">
+          <div class="image-preview" id="image-preview">
+            <i class="fa-regular fa-image"></i>
+            <label for="image-upload-input" class="upload-label">+ Ajouter photo</label>
+            <p class="upload-info">jpg, png : 4mo max</p>
+          </div>
+          <input
+            type="file"
+            id="image-upload-input"
+            name="image"
+            accept="image/png, image/jpeg"
+            required
+            hidden
+          />
+        </div>
+
+        <!-- Titre -->
+		<label for="photo-title">Titre</label>
+        <input type="text" name="title" id="photo-title" required />
+
+        <!-- Catégories dynamiques -->
+		<label for="category-select">Catégorie</label>
+    	<select name="category" id="category-select" required>
+    	</select>
+
+        <!-- Message d'erreur -->
+        <p id="form-error-message" class="form-error-message"></p>
+
+        <hr class="modal-separator" />
+        
+		<!-- Bouton Valider -->
+		<button type="submit" class="submit-btn" disabled>Valider</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script defer src="./assets/js/gallery.js"></script>
+<script defer src="./assets/js/modal.js"></script>
+
 </body>
 </html>

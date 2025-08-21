@@ -52,6 +52,7 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	background-color: #FFFEF8;
 }
 header {
 	display: flex;
@@ -95,6 +96,14 @@ nav li {
 	font-size: 1.2em;
 }
 
+/** Style du lien "login" dans le navigateur **/
+nav a {
+  text-decoration: none; /** enlève la barre dessous **/
+  color: inherit; /** hérite de la couleur du parent **/
+  font-family: inherit; /** hérite de la police **/
+}
+
+
 li:hover {
 	color: #B1663C;
 }
@@ -125,6 +134,35 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
+/** Style des boutons pour les catégories **/
+.filters {
+  	display: flex;
+	justify-content: center;
+ 	flex-wrap: wrap;
+  	gap: 10px;
+	margin-top: 51px; /* espace entre h2 et boutons */
+  	margin-bottom: 50px; /* espace entre boutons et galerie */
+}
+
+.filters button {
+  	padding: 9px 20px;
+  	border: 1px solid #1D6154;
+  	border-radius: 60px;
+  	background-color: #FFFEF8;
+  	color: #1D6154;
+  	font-family: 'Syne', sans-serif;
+  	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer; /* transforme la flèche du curseur en main */
+  	transition: all 0.3s ease; /* temps de transition */
+}
+
+.filters button.active {
+ 	background-color: #1D6154; /* couleur quand bouton sélectionné */
+  	color: #FFFEF8; /* couleur quand bouton non sélectionné */
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -139,7 +177,7 @@ li:hover {
 }
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > * {
 	text-align: center;
@@ -186,3 +224,461 @@ footer nav ul {
 	margin: 2em
 }
 
+/** Styles pour la page de login **/
+#login {
+	width: 50%;
+	margin: auto;
+}
+
+#login > * {
+	text-align: center;
+}
+
+#login h2 {
+	margin-bottom: 20px;
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 30px;
+	color: #1D6154;
+}
+
+#login form {
+	text-align: left;
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#login input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#login label {
+	margin: 2em 0 1em 0;
+}
+
+#login input[type="submit"] {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin: 2em auto;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px;
+	cursor: pointer;
+	border: none;
+}
+
+#login .forgot-password {
+	text-align: center;
+}
+
+#login .forgot-password a {
+	font-family: 'Work Sans';
+	font-size: 14px;
+	font-weight: 500;
+	font-style: medium;
+	color: #3D3D3D;
+	text-decoration: underline;
+}
+
+/** Style du bandeau **/
+#edition-bar {
+  display: none; /* caché par défaut, JS l’affiche si connecté */
+}
+
+#edition-bar .edition-message {
+  background: black;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#edition-bar .edition-message i {
+  margin-right: 8px;
+}
+
+/** Mis à jour de l'entête **/
+.edit-header {
+  display: none;
+}
+
+/** Style message d'erreur **/
+#error-message {
+  color: red;
+  display: none;
+  margin-top: 10px;
+}
+
+/** Style pour le titre et le bouton modifier **/
+.edit-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 80px;
+  margin-bottom: 60px;
+}
+
+.edit-header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.edit-btn {
+  background: none;
+  border: none;
+  color: #000;
+  font-weight: normal;
+  font-family: 'Work Sans', sans-serif;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 0;
+  line-height: 1;
+}
+
+.edition-message {
+  background: black;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.edition-message .icon-left {
+  margin-right: 8px;
+}
+
+/** CSS de la modale **/
+/** Cache par défaut **/
+.hidden {
+  display: none !important;
+}
+
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/** Arrière-plan assombri / Overlay **/
+.modal-overlay {
+  position: absolute;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/** Contenu de la modale **/
+.modal-content {
+  width: 630px;
+  height: 688px;
+  position: relative;
+  background: white;
+  padding: 30px 40px;
+  z-index: 1001;
+  max-width: 600px;
+  width: 90%;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/** Bouton de fermeture de la modale **/
+.close {
+  position: absolute;
+  margin-top: 26px;
+  margin-right: 30px;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/** Titre de section **/
+.modal-title {
+  font-size: 24px;
+  font-weight: 400;
+  margin-top: 60px;
+}
+
+/** Séparateur horizontal **/
+.modal-separator {
+  margin: 38px auto;
+  border: 0;
+  height: 1px;
+  background-color: #B3B3B3;
+  width: 100%;
+}
+
+/** Fixe la taille souhaitée comme sur la maquette **/
+#photo-form {
+  width: 420px;
+  margin: 0 auto; /** centre horizontalement **/
+}
+
+/** Vue de la galerie **/
+.modal-gallery {
+  display: grid;
+  grid-template-columns: repeat(5, 76.86px); /** 5 photos max + largeur fixe par photo **/
+  column-gap: 9px;   /** espace horizontal entre les images **/
+  row-gap: 29px;     /** espace vertical entre les lignes **/
+  justify-content: center;
+  margin-top: 46px; /** espace entre le titre et la première ligne de photos **/
+  margin-bottom: 67px; /** espace entre la dernière de photos et le séparateur **/
+}
+
+.modal-gallery figure {
+  position: relative;
+  display: inline-block;
+}
+
+.modal-gallery img {
+  width: 100%;
+  height: auto;
+  display: block;
+  height: 102.57px;
+  width: 76.86px;
+  object-fit: cover; /** évite la déformation en recadrant **/
+}
+
+.modal-gallery .delete-btn {
+  width: 17px;
+  height: 17px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  font-size: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center; /** centre le contenu de l’icône **/
+}
+
+.modal-separator {
+  width: 420px;
+  top: 1229px;
+  left: 510px;
+  border: 1px;
+  color: #B3B3B3;
+}
+
+/** Boutons **/
+/** Style commun aux boutons de la modale **/
+.modal .add-photo-btn,
+.modal .submit-btn {
+  width: 180px; /* même largeur */
+  height: 38px; /* même hauteur visuelle */
+  display: block;
+  margin: 20px auto 0 auto; /* centré horizontalement */
+  border-radius: 60px; /* arrondi pill complet */
+  font-family: 'Syne', sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Bouton actif */
+.modal .add-photo-btn,
+.modal .submit-btn.enabled {
+  background-color: #1D6154;
+  color: white;
+}
+
+/* Bouton désactivé */
+.modal .submit-btn:disabled {
+  background-color: #a8a8a8;
+  color: white;
+  cursor: not-allowed;
+}
+
+/* Hover seulement si actif */
+.modal .add-photo-btn:hover,
+.modal .submit-btn.enabled:hover {
+  background-color: #144b40;
+}
+
+/** Vue du formulaire "Ajout photo" **/
+.modal-form-view {
+  text-align: center;
+}
+
+/** Titre de la modale "Ajout photo" **/
+.modal-form-view .modal-title {
+  margin-top: 60px;     /* espace entre le haut de la modale et le titre */
+  margin-bottom: 36px;  /* espace entre le titre et la zone d'upload */
+  font-size: 26px;
+  font-weight: 400;
+  text-align: center;
+  font-family: 'Work Sans', sans-serif;
+}
+
+/** Flèche de retour **/
+.back-arrow {
+  font-size: 21px;
+  cursor: pointer;
+  position: absolute;
+  margin-top: 26px;
+  margin-left: 30px;
+  top: 20px;
+  left: 20px;
+}
+
+.fa-regular.fa-image {
+  font-size: 76px;
+  width: 76px;
+  height: 76px;
+  line-height: 76px;
+  display: inline-block;
+  text-align: center;
+}
+
+/** Harmonise la taille des champs Titre et Catégorie dans la modale **/
+#photo-title,
+#category-select {
+  width: 100%;
+  box-sizing: border-box; /* inclut les bordures et padding dans la largeur */
+  padding: 10px; /* même espace interne */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+/** Aligne les labels à gauche dans la modale **/
+#photo-form label {
+  display: block;
+  text-align: left;
+  margin-bottom: 10px; /** espace entre le label et le champ **/
+  font-weight: 500;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+}
+
+/** Champs de formulaire dans la modale **/
+#photo-form input,
+#photo-form select,
+#photo-form textarea {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #444444; /** texte légèrement assombri pour la lisibilité **/
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/** Conteneur du bloc d'upload image **/
+.image-upload {
+  height: 169px;
+  background-color: #e8f1f6;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  display: flex; /** pour centrer le contenu **/
+  align-items: center;
+  justify-content: center;
+}
+
+/** Preview de l'image sélectionnée **/
+.image-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #B9C5CC;
+}
+
+.image-preview i {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+/** Label personnalisé pour input file **/
+.upload-label {
+  display: inline-block;
+  background-color: #B9C5CC;
+  color: #306685;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.upload-info {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  color: #444444;
+}
+
+/** Champs de formulaire **/
+#photo-form input[type="text"],
+#photo-form select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#photo-form input[type="file"] {
+  display: none;
+}
+
+/** Message d’erreur dans le formulaire **/
+.form-error-message {
+  color: red;
+  display: none;
+}
+
+/** Preview de l'image **/
+#image-preview {
+  width: 100%;
+  height: 100%; /* ou la hauteur exacte que tu veux */
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #E8F1F6; /* comme ton style actuel */
+}
+
+#image-preview img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Contenir l'image sans déformation */
+}
+
+.submit-btn {
+  background-color: #a7a7a7; /* grisé par défaut */
+  color: white;
+  border: none;
+  border-radius: 60px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: not-allowed;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:not(:disabled) {
+  background-color: #1D6154; /* même vert que "Ajouter une photo" */
+  cursor: pointer;
+}

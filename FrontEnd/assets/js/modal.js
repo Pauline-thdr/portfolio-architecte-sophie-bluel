@@ -159,6 +159,15 @@ async function handleDeleteProject(event) {
 // Appel des catégories
 async function fillCategorySelect() {
   const selectElement = document.querySelector("#category-select");
+
+  // Ajout d'une option vide par défaut
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.text = "";
+  defaultOption.disabled = true;
+  defaultOption.selected = true;
+  selectElement.add(defaultOption);
+
   const filters = await fetchFilters();
   filters.forEach((filter) => {
     const option = document.createElement("option");
